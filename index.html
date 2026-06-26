@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corpus</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <main>
+
+    <section class="section section--middle" id="preview">
+      <div class="middle-content">
+        <div class="hero-row">
+          <div class="paper">
+            <img class="newspaper" src="assets/paper.png" alt="Preview of the newspaper" />
+          </div>
+
+          <div class="middle-text">
+            <p class="kicker">Stay tapped in.</p>
+            <h1 class="headline">
+              The best writing from
+              <span class="rotator" aria-live="polite"><span class="rotator-word">blogs</span></span>
+              <span class="headline-break">On paper.</span>
+            </h1>
+            <button class="preorder" type="button">Pre-order &middot; $19.99 / month</button>
+          </div>
+        </div>
+
+        <p class="issue-label">Issue 1 &mdash; July</p>
+        <ul class="essays" id="essays">
+          <!-- filled by JS from mock data -->
+        </ul>
+
+        <p class="why"><span class="why-q">Why a newspaper?</span> It has become increasingly important to stay in the know from the internet yet increasingly undesirable to engage with the platforms. If you want to hear challenging, contrarian, or just interesting writing from disparate corners of the internet, this paper is for you. We collect the good parts of the internet for you to enjoy physically.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      var words = [
+        { text: "blogs", color: "#2e7d32" },
+        { text: "X", color: "#000000" },
+        { text: "Substack", color: "#ff6719" }
+      ];
+      var el = document.querySelector(".rotator-word");
+      var i = 0;
+      el.style.color = words[0].color;
+      setInterval(function () {
+        el.classList.add("is-out");
+        setTimeout(function () {
+          i = (i + 1) % words.length;
+          el.textContent = words[i].text;
+          el.style.color = words[i].color;
+          el.classList.remove("is-out");
+        }, 220);
+      }, 2000);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var essays = [
+        {
+          title: "I Should Have Loved Biology",
+          author: "Margaret Vane",
+          synopsis: "A reflection on how the way we teach science strips it of wonder, and what it would look like to fall in love with the living world on its own terms.",
+          url: "https://example.com/biology"
+        },
+        {
+          title: "The Tyranny of the Marginal User",
+          author: "Theo Calloway",
+          synopsis: "Why products keep getting worse: optimizing for the least-engaged new user slowly degrades the experience for everyone who actually cares.",
+          url: "https://example.com/marginal-user"
+        },
+        {
+          title: "How to Do Great Work",
+          author: "Iris Donnelly",
+          synopsis: "A sprawling field guide to ambitious work — choosing what to work on, building momentum, and the role of curiosity, effort, and luck.",
+          url: "https://example.com/great-work"
+        },
+        {
+          title: "Scenes from a World That Could Be",
+          author: "Sam Whitfield",
+          synopsis: "An optimistic tour through near-future technologies and the small, human moments they might quietly make possible.",
+          url: "https://example.com/scenes"
+        },
+        {
+          title: "On the Experience of Being Poor-ish",
+          author: "Nora Ellison",
+          synopsis: "A candid, funny account of life in the gap between broke and comfortable — and what that liminal financial space does to you.",
+          url: "https://example.com/poor-ish"
+        }
+      ];
+
+      var list = document.getElementById("essays");
+
+      essays.forEach(function (essay, idx) {
+        var li = document.createElement("li");
+        li.className = "essay";
+        li.innerHTML =
+          '<button class="essay-head" type="button" aria-expanded="false">' +
+            '<span class="essay-num">' + (idx + 1) + '</span>' +
+            '<span class="essay-title">' + essay.title + '</span>' +
+            '<span class="essay-author">' + essay.author + '</span>' +
+          '</button>' +
+          '<div class="essay-body">' +
+            '<div class="essay-body-inner">' +
+              '<p class="essay-synopsis">' + essay.synopsis + '</p>' +
+              '<a class="essay-link" href="' + essay.url + '" target="_blank" rel="noopener">Read the original &rarr;</a>' +
+            '</div>' +
+          '</div>';
+
+        var head = li.querySelector(".essay-head");
+        head.addEventListener("click", function () {
+          var open = li.classList.toggle("is-open");
+          head.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+
+        list.appendChild(li);
+      });
+    })();
+  </script>
+
+</body>
+</html>

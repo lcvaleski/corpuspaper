@@ -1,0 +1,306 @@
+:root {
+  --offwhite: #f6f7f8;
+  --ink: #111;
+  --paper-bg: #ffffff;
+
+  /* faint newsprint grit: SVG noise as a mask that only nibbles the
+     edges of glyphs (alpha kept between 0.82 and 1.0 = barely there) */
+  --grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='1'%20stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='linear'%20slope='0.18'%20intercept='0.82'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* shared grain treatment — applied to the serif copy */
+.kicker,
+.headline,
+.essay-title {
+  -webkit-mask-image: var(--grain);
+  mask-image: var(--grain);
+  -webkit-mask-size: 90px 90px;
+  mask-size: 90px 90px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper-bg);
+  color: var(--ink);
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  /* deeper stroke — thickens the Times New Roman letterforms */
+  -webkit-text-stroke: 0.35px currentColor;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- Middle ---------- */
+.section--middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 56px 24px;
+}
+
+.middle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* newspaper + copy share a row, aligned at the bottom so the
+   bottom of the paper lines up with the bottom of the pre-order button */
+.hero-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.paper {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.middle-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 16px;
+}
+
+.kicker {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.8vw, 1.3rem);
+  line-height: 1.22;
+  /* match the headline: softer, slightly bolder strokes */
+  -webkit-text-stroke: 0;
+  text-shadow:
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor;
+  -webkit-font-smoothing: antialiased;
+}
+
+.headline {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.8vw, 1.3rem);
+  line-height: 1.22;
+  letter-spacing: 0;
+  /* softer edges + slightly bolder: drop the crisp outline,
+     use a small blurred shadow to thicken and round the strokes */
+  -webkit-text-stroke: 0;
+  text-shadow:
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor;
+  -webkit-font-smoothing: antialiased;
+}
+.headline-break {
+  display: block;
+  margin-top: 16px;
+}
+
+/* rotating source word — fixed width so the line doesn't reflow */
+.rotator {
+  display: inline-block;
+  min-width: 4.6em;
+  text-align: left;
+}
+.rotator-word {
+  display: inline-block;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  transition: opacity 0.22s ease;
+}
+.rotator-word.is-out {
+  opacity: 0;
+}
+
+.preorder {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #000;
+  background: #d9d9d9;
+  border: 1px solid #000;
+  border-radius: 0;
+  padding: 11px 24px;
+  cursor: pointer;
+  /* soft Times, a touch less blur than the headline */
+  -webkit-text-stroke: 0;
+  text-shadow:
+    0 0 0.4px currentColor,
+    0 0 0.4px currentColor,
+    0 0 0.4px currentColor,
+    0 0 0.4px currentColor;
+  -webkit-font-smoothing: antialiased;
+}
+
+.newspaper {
+  display: block;
+  width: min(195px, 31vw);
+  height: auto;
+  filter: grayscale(100%);
+}
+
+/* "Issue 1" label above the article titles */
+.issue-label {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #888;
+  /* soft Times, matching the headline treatment */
+  -webkit-text-stroke: 0;
+  text-shadow:
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* "Why paper?" blurb below the article list */
+.why {
+  /* same trick as .essays: render full width without widening the layout */
+  width: 0;
+  min-width: 100%;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #999;
+  margin-top: 4px;
+  /* soft, slightly heavier stroke */
+  -webkit-text-stroke: 0;
+  text-shadow:
+    0 0 0.5px currentColor,
+    0 0 0.5px currentColor,
+    0 0 0.5px currentColor;
+  -webkit-font-smoothing: antialiased;
+}
+.why-q {
+  text-decoration: underline;
+}
+
+/* ---------- Essay list (numbered, expandable) ---------- */
+.essays {
+  list-style: none;
+  /* contribute nothing to the layout width, but render at the
+     full hero-row width so dividers stop at the copy/button edge */
+  width: 0;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.essay {
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.essay-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.essay-num {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #777;
+  color: #555;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.essay-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #555;
+}
+
+.essay-author {
+  margin-left: 8px;
+  font-size: 0.66rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #888;
+  white-space: nowrap;
+}
+
+/* smooth height animation via the grid 0fr -> 1fr trick */
+.essay-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  /* keep the (collapsed) synopsis from forcing the column wide */
+  grid-template-columns: minmax(0, 1fr);
+  transition: grid-template-rows 0.3s ease;
+}
+.essay.is-open .essay-body {
+  grid-template-rows: 1fr;
+}
+
+.essay-body-inner {
+  overflow: hidden;
+  min-height: 0;
+  min-width: 0;
+  padding-left: 25px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.essay.is-open .essay-body-inner {
+  opacity: 1;
+  padding-bottom: 9px;
+}
+
+.essay-synopsis {
+  font-size: 0.66rem;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.essay-link {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+.essay-link:hover {
+  text-decoration: underline;
+}
