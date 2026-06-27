@@ -255,6 +255,14 @@ body {
   font-weight: 700;
   line-height: 1.2;
   color: #555;
+  /* soft Times, matching the headline/kicker treatment */
+  -webkit-text-stroke: 0;
+  text-shadow:
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor,
+    0 0 0.6px currentColor;
+  -webkit-font-smoothing: antialiased;
 }
 
 .essay-author {
