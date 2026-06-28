@@ -203,6 +203,15 @@ body {
 }
 .why-q {
   text-decoration: underline;
+  margin: 0;
+}
+.why-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+}
+.why-list li {
+  margin: 3px 0;
 }
 
 /* ---------- Essay list (numbered, expandable) ---------- */
@@ -319,4 +328,82 @@ body {
 }
 .essay-link:hover {
   text-decoration: underline;
+}
+
+/* ---------- Colophon: faint contact + signup ---------- */
+.colophon {
+  width: 0;
+  min-width: 100%;
+  margin-top: 22px;
+  font-family: "Times New Roman", Times, serif;
+  color: #bbb;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+.colophon-line {
+  margin: 0 0 6px;
+}
+.colophon-link {
+  color: #aaa;
+  text-decoration: underline;
+}
+.colophon-link:hover {
+  color: #888;
+}
+.signup {
+  margin-top: 10px;
+}
+.signup-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.signup-label {
+  flex: 0 0 auto;
+  color: #bbb;
+}
+.signup-input {
+  flex: 0 0 auto;
+  width: 160px;
+  min-width: 0;
+  padding: 3px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 0.72rem;
+  color: #777;
+}
+.signup-input:focus {
+  outline: none;
+  border-bottom-color: #aaa;
+}
+.signup-input::placeholder {
+  color: #c4c4c4;
+}
+.signup-submit {
+  flex: 0 0 auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 0.72rem;
+  color: #999;
+  text-decoration: underline;
+}
+.signup-submit:hover {
+  color: #666;
+}
+.signup-submit:disabled,
+.signup-input:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.signup-thanks {
+  margin: 6px 0 0;
+  color: #aaa;
 }

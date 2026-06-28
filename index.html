@@ -28,12 +28,31 @@
           </div>
         </div>
 
-        <p class="why"><span class="why-q">Why a newspaper?</span> It has become increasingly important to stay in the know from the internet yet increasingly undesirable to engage with its platforms. If you want to hear challenging, contrarian, or just interesting writing from disparate corners of the internet, this paper is for you. We collect the good parts of the internet for you to enjoy physically.</p>
+        <div class="why">
+          <p class="why-q">Why a newspaper?</p>
+          <ul class="why-list">
+            <li>* it is becoming undesirable to be on platforms</li>
+            <li>* it is important to still stay in the know from the internet (x, substack, etc)</li>
+            <li>* physical papers feel good and are good for your brain</li>
+          </ul>
+        </div>
 
         <p class="issue-label">Issue 1 &middot; July</p>
         <ul class="essays" id="essays">
           <!-- filled by JS from mock data -->
         </ul>
+
+        <div class="colophon">
+          <p class="colophon-line">Want your writing to be considered? <a class="colophon-link" href="mailto:contact@corpuspaper.com">contact@corpuspaper.com</a></p>
+          <form class="signup" id="signup" novalidate>
+            <div class="signup-row">
+              <label class="signup-label" for="signup-email">Stay updated</label>
+              <input id="signup-email" class="signup-input" type="email" name="email" placeholder="you@email.com" required />
+              <button class="signup-submit" type="submit">Submit</button>
+            </div>
+            <p class="signup-thanks" hidden>Thanks &mdash; we&rsquo;ll be in touch.</p>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -69,24 +88,6 @@
           author: "Will Manidis",
           url: "https://minutes.substack.com/p/on-grindslop",
           linkOnly: true
-        },
-        {
-          title: "The Tyranny of the Marginal User",
-          author: "Theo Calloway",
-          synopsis: "Why products keep getting worse: optimizing for the least-engaged new user slowly degrades the experience for everyone who actually cares.",
-          url: "https://example.com/marginal-user"
-        },
-        {
-          title: "How to Do Great Work",
-          author: "Iris Donnelly",
-          synopsis: "A sprawling field guide to ambitious work — choosing what to work on, building momentum, and the role of curiosity, effort, and luck.",
-          url: "https://example.com/great-work"
-        },
-        {
-          title: "Scenes from a World That Could Be",
-          author: "Sam Whitfield",
-          synopsis: "An optimistic tour through near-future technologies and the small, human moments they might quietly make possible.",
-          url: "https://example.com/scenes"
         }
       ];
 
@@ -127,6 +128,26 @@
         });
 
         list.appendChild(li);
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var form = document.getElementById("signup");
+      if (!form) return;
+      var input = document.getElementById("signup-email");
+      var thanks = form.querySelector(".signup-thanks");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!input.value || input.value.indexOf("@") === -1) {
+          input.focus();
+          return;
+        }
+        input.value = "";
+        input.setAttribute("disabled", "disabled");
+        form.querySelector(".signup-submit").setAttribute("disabled", "disabled");
+        thanks.hidden = false;
       });
     })();
   </script>
