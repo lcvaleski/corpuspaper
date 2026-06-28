@@ -65,10 +65,10 @@
     (function () {
       var essays = [
         {
-          title: "I Should Have Loved Biology",
-          author: "Margaret Vane",
-          synopsis: "A reflection on how the way we teach science strips it of wonder, and what it would look like to fall in love with the living world on its own terms.",
-          url: "https://example.com/biology"
+          title: "On Grindslop",
+          author: "Will Manidis",
+          url: "https://minutes.substack.com/p/on-grindslop",
+          linkOnly: true
         },
         {
           title: "The Tyranny of the Marginal User",
@@ -95,6 +95,18 @@
       essays.forEach(function (essay, idx) {
         var li = document.createElement("li");
         li.className = "essay";
+
+        if (essay.linkOnly) {
+          li.innerHTML =
+            '<a class="essay-head essay-head--link" href="' + essay.url + '" target="_blank" rel="noopener">' +
+              '<span class="essay-num">' + (idx + 1) + '</span>' +
+              '<span class="essay-title">' + essay.title + '</span>' +
+              '<span class="essay-author">' + essay.author + '</span>' +
+            '</a>';
+          list.appendChild(li);
+          return;
+        }
+
         li.innerHTML =
           '<button class="essay-head" type="button" aria-expanded="false">' +
             '<span class="essay-num">' + (idx + 1) + '</span>' +
