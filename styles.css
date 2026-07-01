@@ -65,6 +65,13 @@ body {
   margin: 0 auto;
 }
 
+/* scale the whole preview up 15% uniformly — desktop only */
+@media (min-width: 768px) {
+  .middle-content {
+    zoom: 1.15;
+  }
+}
+
 /* newspaper + copy share a row, aligned at the bottom so the
    bottom of the paper lines up with the bottom of the pre-order button */
 .hero-row {
